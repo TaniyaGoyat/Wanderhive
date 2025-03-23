@@ -34,4 +34,7 @@ router.put("/:id",isLoggedIn,isOwner,upload.single('listing[image]'),wrapAsync(l
 
 router.delete("/:id",isLoggedIn,isOwner,wrapAsync(listingController.deleteListing));
 
+
+
+
 module.exports=router;
