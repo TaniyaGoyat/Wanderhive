@@ -1,4 +1,4 @@
-<%layout("/layouts/boilerplate")%>
+<!-- <%layout("/layouts/boilerplate")%>
 
 
 <style>
@@ -45,10 +45,7 @@
 </style>
    
    <div id="filters">
-        <!-- <div class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-        </div> -->
+      
         <div class="filter">
             <div>
             <a href="/listings/sort?cat=Room"><i class="fa-solid fa-bed"></i></a></div>
@@ -138,4 +135,176 @@
            })
    </script>
  
+ -->
 
+
+
+ <style>
+    #filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center; /* Center align filters */
+      gap: 1rem; /* Add spacing between filters */
+    padding-top:20px;
+    }
+  
+    .filter {
+      text-align: center;
+      flex: 1 1 auto; /* Allow filters to adjust dynamically */
+      max-width: 150px; /* Limit width so multiple filters fit per row */
+      opacity: 0.7;
+      margin-top: 20px;
+    }
+  
+    .filter:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  
+    .filter p {
+      font-size: 0.8rem;
+    }
+  
+    .tax-info {
+      display: none;
+    }
+  
+    .tax-toggle {
+      border: 1px solid black;
+      border-radius: 2rem;
+      height: 3rem;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      margin: 1rem auto; /* Centers the toggle */
+    }
+  
+    .filter a {
+      color: black;
+      opacity: 0.7;
+    }
+  
+    .filter a:hover {
+      color: black;
+      opacity: 0.7;
+    }
+  
+    /* Responsive Styling */
+    @media (max-width: 992px) { /* Medium screens (md) */
+      #filters {
+        justify-content: center;
+      }
+  
+      .filter {
+        max-width: 120px;
+        flex: 1 1 30%; /* Allow up to 3 filters per row */
+      }
+    }
+  
+    @media (max-width: 768px) { /* Small screens (sm) */
+      .filter {
+        flex: 1 1 40%; /* Allow up to 2 filters per row */
+      }
+    }
+  
+    @media (max-width: 576px) { /* Extra small screens */
+      .filter {
+        flex: 1 1 100%; /* Stack filters but keep centered */
+      }
+    }
+  </style>
+  
+  
+  <div id="filters">
+    <div class="filter mt-3">
+      <div>
+        <a href="/listings/sort?cat=Room"><i class="fa-solid fa-bed"></i></a>
+      </div>
+      <p>Room</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Iconic"><i class="fa-solid fa-mountain-city"></i></a></div>
+      <p>Iconic Cities</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Mountain"><i class="fa-solid fa-mountain-sun"></i></a></div>
+      <p>Mountains</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Castle"><i class="fa-brands fa-fort-awesome"></i></a></div>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Pool"><i class="fa-solid fa-person-swimming"></i></a></div>
+      <p>Amazing Pools</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Camp"><i class="fa-solid fa-campground"></i></a></div>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Farm"><i class="fa-solid fa-tractor"></i></a></div>
+      <p>Farms</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Arctic"><i class="fa-solid fa-snowflake"></i></a></div>
+      <p>Arctic</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Dome"><i class="fa-solid fa-landmark-dome"></i></a></div>
+      <p>Domes</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Houseboat"><i class="fa-solid fa-sailboat"></i></a></div>
+      <p>Houseboat</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Palace"><i class="fa-solid fa-place-of-worship"></i></a></div>
+      <p>Palace</p>
+    </div>
+    <div class="filter">
+      <div><a href="/listings/sort?cat=Ski"><i class="fa-solid fa-hotel"></i></a></div>
+      <p>Ski Resort</p>
+    </div>
+  
+    <div class="tax-toggle">
+      <div class="form-check form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-2 mt-3">
+    <% for(listing of allListings){ %>
+        <a href="/listings/<%=listing._id%>" class="listing-link">
+            <div class="card col listing-card">
+                <img src="<%=listing.image.url%>" class="card-img-top" alt="imageIdx" style="height:20rem">
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                    <b><p><%=listing.title%></p></b>
+                    &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>/day
+                    <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+                </div>
+              </div>
+        </a>
+       <%}%>
+   </div>
+  
+  <script>
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click", () => {
+      let taxInfo = document.getElementsByClassName("tax-info");
+      for (info of taxInfo) {
+        if (info.style.display != "inline") {
+          info.style.display = "inline";
+        } else {
+          info.style.display = "none";
+        }
+      }
+    });
+  </script>
+  

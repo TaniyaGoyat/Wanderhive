@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
   .btn-search{
     background-color:#fe424d ;
     color:white;
@@ -29,10 +29,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <h2 style="color:#fe424d;margin-right:20px" >Wanderlust</h2>
-          <!-- <a class="nav-link" href="/listings">Explore</a> -->
+          <h2 style="color:#fe424d;margin-right:20px" >Wanderlust</h2> -->
+       
          
-      </div>
+      <!-- </div>
       <div class="navbar-nav ms-auto">
         <form class="d-flex" role="search" method="GET" action="/listings/search" >
           <input class="form-control me-2 search-input" type="search" name="search" placeholder="Search destinations" aria-label="Search">
@@ -52,4 +52,88 @@
       </div>
       </div>
     </div>
+  </nav> -->
+
+
+
+  <style>
+    /* Search Bar & Button Styling (Same as Before) */
+    .btn-search {
+      background-color: #fe424d;
+      color: white;
+      border-radius: 25px;
+      padding: 0 1rem;
+    }
+  
+    .btn-search:hover {
+      background-color: #fe424d;
+      color: white;
+    }
+  
+    .btn-search i {
+      display: inline;
+      margin-right: 0.5rem;
+    }
+  
+    .search-input {
+      border-radius: 25px;
+      padding: 0.5rem 3rem;
+      font-size: 1rem;
+    }
+  
+    /* Dropdown Menu Background for Mobile Only */
+    @media (max-width: 768px) {
+      .navbar-collapse {
+        background-color: #f8f9fa; /* Light Gray */
+        padding: 10px;
+        border-radius: 10px;
+      }
+  
+      .navbar-nav {
+        text-align: center;
+      }
+    }
+  </style>
+  
+  <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand" href="/listings">
+        <i class="fa-solid fa-compass"></i>
+      </a>
+  
+      <!-- Mobile Toggle Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar Items -->
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <h2 style="color:#fe424d; margin-right:20px;">Wanderlust</h2>
+        </div>
+  
+        <!-- Search Form -->
+        <div class="navbar-nav ms-auto">
+          <form class="d-flex" role="search" method="GET" action="/listings/search">
+            <input class="form-control me-2 search-input" type="search" name="search" placeholder="Search destinations" aria-label="Search">
+            <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+          </form>
+        </div>
+  
+        <!-- Right Links -->
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="/listings">Explore</a>
+          <a class="nav-link" href="/listings/new">List your Site</a>
+          <% if (!currUser) { %>
+            <a class="nav-link" href="/signup"><b>Sign up</b></a>
+            <a class="nav-link" href="/login"><b>Login</b></a>
+          <% } %>
+          <% if (currUser) { %>
+            <a class="nav-link" href="/logout">Logout</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
   </nav>
+  
