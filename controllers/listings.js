@@ -82,6 +82,19 @@ module.exports.index= async(req,res)=>{
       // res.send("")
   }
 
+  module.exports.sortListings = async (req, res) => {
+    try {
+        const { cat } = req.query;
+        console.log(cat);
+        const allListings = await Listing.find({ category: cat }); // Fixed query syntax
+
+        res.render("./listings/index.ejs", { allListings });
+    } catch (error) {
+        console.error("Error fetching listings:", error);
+        res.status(500).send("Server Error");
+    }
+};
+
 
 
 

@@ -12,6 +12,8 @@ const upload = multer({storage });
 //All listings Route // Index Route
 router.get("/", wrapAsync(listingController.index));
 
+//sort route
+router.get("/sort",listingController.sortListings);
 
 
 //new route
