@@ -48,15 +48,26 @@
                 <input type="text" name="listing[location]" placeholder="Jaipur,Rajasthan" class="form-control" required>
                 <div class="invalid-feedback">Location should be valid</div> 
             </div>
-            <div class="mb-3">
-                <label for="category" class="form-label">Category</label>
-                <input type="text" name="listing[category]" placeholder="Room" class="form-control" >
-                <!-- <div class="invalid-feedback">Location should be valid</div>  -->
-            </div>
 
-           
-      
-           <button class="btn btn-dark add-btn mt-3 mb-3">Add</button>
+     <div class="input-group mb-3">
+    <label class="input-group-text" for="inputGroupSelect01">Select</label>
+    <select class="custom-select" id="inputGroupSelect01" name="category">
+        <option selected disabled value="">Category</option>
+        <option value="Room">Room</option>
+        <option value="Mountain">Mountain</option>
+        <option value="Houseboat">Houseboat</option>
+        <option value="Castle">Castle</option>
+        <option value="Pool">Pool</option>
+        <option value="Camp">Camp</option>
+        <option value="Farm">Farm</option>
+        <option value="Arctic">Arctic</option>
+        <option value="Dome">Dome</option>
+        <option value="Iconic">Iconic</option>
+    </select>
+</div>
+
+              
+              <button class="btn btn-dark add-btn mt-3 mb-3">Add</button>
        
         </form>
         </div>

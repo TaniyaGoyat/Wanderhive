@@ -28,7 +28,12 @@ module.exports.index= async(req,res)=>{
      let filename=req.file.filename;
      console.log(url);
      console.log(filename);
-          const newlist= new Listing(req.body.listing);
+    
+     const newlist = new Listing({
+        ...req.body.listing, // Spread existing listing data
+        category: req.body.category // Manually assign category
+    });
+          console.log(newlist);
            newlist.owner=req.user._id;
            newlist.image={url,filename};
            await newlist.save();
@@ -87,6 +92,7 @@ module.exports.index= async(req,res)=>{
         const { cat } = req.query;
         console.log(cat);
         const allListings = await Listing.find({ category: cat }); // Fixed query syntax
+        console.log(allListings);
 
         res.render("./listings/index.ejs", { allListings });
     } catch (error) {
@@ -94,6 +100,52 @@ module.exports.index= async(req,res)=>{
         res.status(500).send("Server Error");
     }
 };
+//   module.exports.searchListing = async (req, res) => {
+//     try {
+//         const {search} = req.query;
+//         console.log(search);
+//         const listdata=await Listing.findOne({title:search}).populate({path:"reviews",populate:{path:"author"},}).populate("owner");
+//         console.log(listdata);
+
+//         res.render("./listings/show.ejs", { listdata });
+//     } catch (error) {
+//         console.error("Error fetching listings:", error);
+//         res.status(500).send("Server Error");
+//     }
+    
+// };
+
+module.exports.searchListing = async (req, res) => {
+    try {
+        const { search } = req.query;
+        console.log("Search Query:", search);
+
+        // Handle case where search is empty
+        if (!search || search.trim() === "") {
+            req.flash("error", "Please enter a search term");
+            return res.redirect("/listings");
+        }
+
+        // Case-insensitive, partial match search
+        const listdata = await Listing.findOne({
+            title: { $regex: new RegExp(search, "i") }
+        }).populate({ path: "reviews", populate: { path: "author" } }).populate("owner");
+
+        // console.log("Found Listing:", listdata);
+
+        if (!listdata) {
+            req.flash("error", "No listing found");
+            return res.redirect("/listings"); // Redirect if no results found
+        }
+
+        res.render("./listings/show.ejs", { listdata });
+    } catch (error) {
+        console.error("Error fetching listings:", error);
+        res.status(500).send("Server Error");
+    }
+};
+
+
 
 
 
