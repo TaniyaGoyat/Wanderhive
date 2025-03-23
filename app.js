@@ -119,6 +119,16 @@ app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
 
+
+app.get("/privacy",(req,res)=>{
+    res.render("privacy.ejs");
+})
+
+app.get("/terms",(req,res)=>{
+    res.render("terms.ejs");
+})
+
+
 //routes in routes/listing.js
 
 
