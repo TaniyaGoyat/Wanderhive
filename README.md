@@ -42,5 +42,5 @@ WanderHive is a full-stack web application that allows users to discover, list, 
 
 ---
 
-## 📂 Project Structure
+
 
